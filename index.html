@@ -775,6 +775,9 @@
     line-height: 1.6;
     margin-bottom: 20px;
   }
+  .blog-card {
+    cursor: pointer;
+  }
   .blog-read {
     margin-top: auto;
     font-family: var(--font-mono);
@@ -782,7 +785,94 @@
     color: var(--accent-indigo);
     font-weight: 600;
     display: flex; align-items: center; gap: 6px;
+    transition: gap 0.2s, color 0.2s;
   }
+  .blog-card:hover .blog-read {
+    gap: 10px;
+    color: var(--accent-purple);
+  }
+
+  /* ---------- ARTICLE MODAL READER ---------- */
+  .article-modal-backdrop {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+  }
+  .article-modal-backdrop.active {
+    opacity: 1; visibility: visible;
+  }
+  .article-modal-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    width: 100%; max-width: 820px;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding: 44px;
+    transform: scale(0.95) translateY(15px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .article-modal-backdrop.active .article-modal-card {
+    transform: scale(1) translateY(0);
+  }
+  .article-close-btn {
+    position: absolute; top: 24px; right: 24px;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #F1F5F9; border: 1px solid var(--border-subtle);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: var(--text-secondary);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .article-close-btn:hover {
+    background: #E2E8F0; color: var(--text-primary); transform: rotate(90deg);
+  }
+  .article-meta-bar {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .article-modal-body {
+    color: var(--text-secondary);
+    font-size: 1rem; line-height: 1.8;
+  }
+  .article-modal-body h3 {
+    font-size: 1.3rem; color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+  .article-modal-body p {
+    margin-bottom: 16px;
+  }
+  .article-modal-body ul {
+    margin: 0 0 20px 24px;
+  }
+  .article-modal-body li {
+    margin-bottom: 8px;
+  }
+  .article-code-block {
+    background: #0F172A; color: #E2E8F0;
+    padding: 18px 22px; border-radius: var(--radius-md);
+    font-family: var(--font-mono); font-size: 0.85rem;
+    overflow-x: auto; margin: 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.6;
+  }
+  .article-callout {
+    background: rgba(79, 70, 229, 0.06);
+    border-left: 4px solid var(--accent-indigo);
+    padding: 18px 22px; border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 24px 0; font-size: 0.95rem; color: var(--text-primary);
+  }
+  @media (max-width: 640px) {
+    .article-modal-card { padding: 24px; max-height: 92vh; }
+  }
+
 
   /* ---------- CONTACT & FOOTER ---------- */
   .contact-box {
@@ -1597,35 +1687,35 @@
       </div>
 
       <div class="blog-grid">
-        <div class="blog-card reveal">
+        <div class="blog-card reveal" data-article="n8n-agents">
           <div class="blog-tag">AI ENGINEERING</div>
           <h3>Building AI Agents with n8n</h3>
           <p>How to design autonomous multi-step agents that connect LLMs to production SQL databases securely.</p>
           <div class="blog-read">Read Article →</div>
         </div>
 
-        <div class="blog-card reveal">
+        <div class="blog-card reveal" data-article="reporting-pipeline">
           <div class="blog-tag">DATA PIPELINES</div>
           <h3>Reducing Reporting from 4 Days to 30 Minutes</h3>
           <p>A breakdown of the Python &amp; Azure pipeline architecture that eliminated manual spreadsheet bottlenecks.</p>
           <div class="blog-read">Read Article →</div>
         </div>
 
-        <div class="blog-card reveal">
+        <div class="blog-card reveal" data-article="sme-architecture">
           <div class="blog-tag">ARCHITECTURE</div>
           <h3>Modern Data Engineering for SMEs</h3>
           <p>Selecting a cost-effective, scalable data stack for growing enterprises without over-engineering.</p>
           <div class="blog-read">Read Article →</div>
         </div>
 
-        <div class="blog-card reveal">
+        <div class="blog-card reveal" data-article="powerbi-tuning">
           <div class="blog-tag">BI OPTIMIZATION</div>
           <h3>Power BI Performance Optimization</h3>
           <p>Advanced DAX patterns and Star Schema modeling techniques for lightning-fast executive dashboards.</p>
           <div class="blog-read">Read Article →</div>
         </div>
 
-        <div class="blog-card reveal">
+        <div class="blog-card reveal" data-article="ai-bi-future">
           <div class="blog-tag">FUTURE OF DATA</div>
           <h3>How AI Changes Business Intelligence</h3>
           <p>Moving from static, reactive dashboards to proactive, conversational AI decision support systems.</p>
@@ -1679,6 +1769,21 @@
 
 </main>
 
+<!-- ARTICLE MODAL READER -->
+<div id="articleModal" class="article-modal-backdrop" role="dialog" aria-modal="true">
+  <div class="article-modal-card">
+    <button class="article-close-btn" id="modalCloseBtn" aria-label="Close article">&times;</button>
+    <div class="article-meta-bar">
+      <span class="badge" id="modalTag">AI ENGINEERING</span>
+      <span class="mono" style="font-size: 0.78rem; color: var(--text-muted);" id="modalMeta">July 2026 • 6 min read</span>
+    </div>
+    <h2 id="modalTitle" style="font-size: 1.8rem; margin-bottom: 20px; line-height: 1.3;">Article Title</h2>
+    <div class="article-modal-body" id="modalBody">
+      <!-- Article content dynamically injected -->
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -1688,8 +1793,200 @@
 </footer>
 
 <script>
-  // Scroll reveal animation using IntersectionObserver
+  const ARTICLES_DATA = {
+    "n8n-agents": {
+      tag: "AI ENGINEERING",
+      meta: "July 2026 • 6 min read",
+      title: "Building Autonomous AI Agents with n8n & Production SQL Databases",
+      content: `
+        <p class="lede" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 500; margin-bottom: 20px;">
+          How to design production-grade autonomous multi-step agents that connect Large Language Models (LLMs) securely to PostgreSQL and MySQL enterprise databases.
+        </p>
+
+        <h3>The Architectural Challenge</h3>
+        <p>
+          While basic LLM wrappers can generate SQL queries, running autonomous agents against live production databases presents significant security, latency, and reliability risks. Without guardrails, an agent might run unbounded <code>SELECT *</code> joins across gigabytes of data or misinterpret complex foreign key constraints.
+        </p>
+
+        <div class="article-callout">
+          <strong>Key Rule:</strong> Never give an LLM agent raw credentials to write directly to production tables. Use structured function calling with pre-compiled read-only stored procedures and parameter validation.
+        </div>
+
+        <h3>System Workflow & Topology</h3>
+        <p>Our autonomous workflow consists of five distinct orchestration stages in n8n:</p>
+        <ul>
+          <li><strong>Webhook Ingestion:</strong> Captures incoming user queries via Slack, REST API, or web dashboard.</li>
+          <li><strong>Intent & Context Parsing:</strong> An LLM node (Claude / GPT-4) extracts entities, date ranges, and target metrics into JSON.</li>
+          <li><strong>Function Call Validation:</strong> n8n Code nodes validate input parameters against strict JSON schemas before hitting the database.</li>
+          <li><strong>Read-Only Query Execution:</strong> Safe SQL execution against a replicated read-replica database with execution timeouts.</li>
+          <li><strong>Synthesis & Formatting:</strong> The agent transforms tabular query outputs into executive summary bullet points and chart payloads.</li>
+        </ul>
+
+        <h3>n8n Function Execution Logic</h3>
+        <div class="article-code-block">
+// Sample n8n Code Node Parameter Sanitization
+const userQuery = $input.item.json.userQuery;
+const startDate = $input.item.json.startDate;
+const endDate = $input.item.json.endDate;
+
+if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(startDate)) {
+  throw new Error("Invalid start date parameter format.");
+}
+
+return {
+  sanitizedSQL: `SELECT cohort_name, COUNT(user_id) as total_enrollments 
+                 FROM program_enrollments 
+                 WHERE created_at BETWEEN $1 AND $2 
+                 GROUP BY cohort_name ORDER BY total_enrollments DESC;`,
+  params: [startDate, endDate]
+};
+        </div>
+
+        <h3>Business Impact</h3>
+        <p>
+          By deploying this agent framework for program managers, we eliminated the need for ad-hoc SQL requests, reducing internal analytics ticket queues by 75% while maintaining enterprise security compliance.
+        </p>
+      `
+    },
+    "reporting-pipeline": {
+      tag: "DATA PIPELINES",
+      meta: "June 2026 • 8 min read",
+      title: "Reducing Program Reporting from 4 Days to 30 Minutes: A Data Pipeline Breakdown",
+      content: `
+        <p class="lede" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 500; margin-bottom: 20px;">
+          A technical deep dive into replacing manual Excel data aggregation with Python ETL scripts, automated API ingestion, and automated Power BI refreshes.
+        </p>
+
+        <h3>The Legacy Bottleneck</h3>
+        <p>
+          In large impact and entrepreneurship support programs, tracking performance across 500+ businesses required program officers to manually collect, clean, and consolidate dozens of disparate Excel spreadsheets every month. This process took over 4 full working days and introduced high error rates.
+        </p>
+
+        <h3>The Modern Pipeline Architecture</h3>
+        <p>We re-architected the reporting system into an automated end-to-end data pipeline:</p>
+        <ul>
+          <li><strong>KoboToolbox & API Ingestion:</strong> Real-time field data collection pushing data directly via webhooks to an Azure API endpoint.</li>
+          <li><strong>Python Data Cleaning Engine:</strong> Custom Pandas & Pydantic pipelines that execute automated schema validation, email syntax verification, and typo detection.</li>
+          <li><strong>PostgreSQL Storage Layer:</strong> Cleaned data is versioned and upserted into structured transactional tables with automated backup logs.</li>
+          <li><strong>Power BI Automated Refreshes:</strong> Direct Lake / Import mode dataset refresh triggered automatically upon pipeline completion.</li>
+        </ul>
+
+        <div class="article-callout">
+          <strong>Outcome:</strong> End-to-end report generation dropped from 96 hours (4 days) down to just 30 minutes, giving leadership live visibility into cohort metrics.
+        </div>
+
+        <h3>Python Validation Snippet</h3>
+        <div class="article-code-block">
+import pandas as pd
+
+def clean_program_data(df: pd.DataFrame) -> pd.DataFrame:
+    # Remove duplicate business registrations
+    df = df.drop_duplicates(subset=["tin_number", "business_email"])
+    
+    # Standardize telephone formats
+    df["phone_clean"] = df["phone"].str.replace(r"[^\d+]", "", regex=True)
+    
+    # Flag missing indicator data
+    df["data_complete"] = df["revenue_q3"].notna() & df["employee_count"].notna()
+    
+    return df
+        </div>
+      `
+    },
+    "sme-architecture": {
+      tag: "ARCHITECTURE",
+      meta: "May 2026 • 7 min read",
+      title: "Modern Data Stack Architecture for Growing African Enterprises & SMEs",
+      content: `
+        <p class="lede" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 500; margin-bottom: 20px;">
+          Why high-overhead enterprise stacks often fail growing businesses in emerging markets, and how to build a lean, high-performing data platform under $100/month.
+        </p>
+
+        <h3>The Over-Engineering Trap</h3>
+        <p>
+          Many organizations try to copy Fortune 500 data stacks (Snowflake + Fivetran + dbt Cloud + Looker), only to end up with thousands of dollars in monthly cloud bills and unmaintained data pipelines. For mid-sized enterprises, simplicity and operational clarity are key.
+        </p>
+
+        <h3>The Lean Data Stack Framework</h3>
+        <ul>
+          <li><strong>Database Engine:</strong> Managed PostgreSQL or Google BigQuery serverless pricing.</li>
+          <li><strong>Transformation:</strong> Python scripts or dbt Core running via GitHub Actions / Cloud Run.</li>
+          <li><strong>Visualization:</strong> Power BI or Metabase self-hosted.</li>
+          <li><strong>Orchestration:</strong> Lightweight cron / GitHub Actions / n8n triggers.</li>
+        </ul>
+
+        <div class="article-callout">
+          <strong>Pragmatic Strategy:</strong> Prioritize clean data modeling and clear metric definitions over complex multi-cloud streaming infrastructure.
+        </div>
+      `
+    },
+    "powerbi-tuning": {
+      tag: "BI OPTIMIZATION",
+      meta: "April 2026 • 9 min read",
+      title: "Power BI Performance Tuning: DAX Optimization & Star Schema Modeling",
+      content: `
+        <p class="lede" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 500; margin-bottom: 20px;">
+          Proven modeling patterns and DAX optimization techniques to transform slow, laggy dashboards into instant, executive-ready BI experiences.
+        </p>
+
+        <h3>1. The Golden Rule: Star Schema Over Flat Tables</h3>
+        <p>
+          Flat, wide single-table models kill DAX engine performance. By breaking flat tables into dedicated <strong>Fact Tables</strong> (transactions, metrics) and <strong>Dimension Tables</strong> (date, cohort, organization), Power BI's VertiPaq engine can compress data up to 10x more efficiently.
+        </p>
+
+        <h3>2. DAX Measure Tuning</h3>
+        <ul>
+          <li>Avoid using <code>SUMX</code> and iterative functions over entire fact tables when simple aggregations work.</li>
+          <li>Replace bidirectional relationships with explicit <code>KEEPFILTERS</code> or single-direction relationships.</li>
+          <li>Pre-aggregate high-cardinality detail columns (like raw timestamps or GUID strings) out of fact tables.</li>
+        </ul>
+
+        <div class="article-code-block">
+-- Optimized DAX Pattern for Active Cohort Businesses
+ActiveBusinesses = 
+CALCULATE(
+    DISTINCTCOUNT(FactProgramMetrics[business_id]),
+    KEEPFILTERS(DimBusinessStatus[status] = "Active"),
+    KEEPFILTERS(DimCohort[cohort_year] >= 2024)
+)
+        </div>
+
+        <div class="article-callout">
+          <strong>Result:</strong> Dashboard render times decreased from 45 seconds to 1.2 seconds across 6 enterprise executive reports.
+        </div>
+      `
+    },
+    "ai-bi-future": {
+      tag: "FUTURE OF DATA",
+      meta: "March 2026 • 6 min read",
+      title: "From Static Dashboards to Conversational AI Decision Support Systems",
+      content: `
+        <p class="lede" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 500; margin-bottom: 20px;">
+          Why static dashboards are no longer enough for modern leaders, and how conversational AI decision systems are changing how businesses interact with data.
+        </p>
+
+        <h3>The Passive Dashboard Dilemma</h3>
+        <p>
+          Most decision-makers stop checking dashboards after the first few weeks because dashboards are passive—they require human attention to log in, filter, interpret trends, and draw conclusions.
+        </p>
+
+        <h3>The Proactive Conversational Future</h3>
+        <p>
+          Modern intelligence platforms combine structured BI semantic layers with conversational AI agents. Instead of logging into a portal, managers can ask in plain English:
+        </p>
+        <div class="article-callout">
+          <em>"Show me which cohorts had the highest dropout rates last month and highlight the top 3 contributing factors."</em>
+        </div>
+
+        <p>
+          The system responds with direct text insights, generated charts, and recommended action steps delivered directly into WhatsApp, Slack, or email workflows.
+        </p>
+      `
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
+    // Scroll reveal animation
     const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1701,6 +1998,52 @@
     }, { threshold: 0.1 });
 
     revealElements.forEach(el => observer.observe(el));
+
+    // Article Modal Reader Logic
+    const modal = document.getElementById('articleModal');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const modalTag = document.getElementById('modalTag');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    function openArticle(articleId) {
+      const data = ARTICLES_DATA[articleId];
+      if (!data) return;
+
+      modalTag.textContent = data.tag;
+      modalMeta.textContent = data.meta;
+      modalTitle.textContent = data.title;
+      modalBody.innerHTML = data.content;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Attach click listeners to all blog cards and read buttons
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const articleId = card.getAttribute('data-article');
+        if (articleId) openArticle(articleId);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
   });
 </script>
 
