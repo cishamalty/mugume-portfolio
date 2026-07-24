@@ -1,18 +1,1708 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Mugume Martin — Data Analyst & Intelligence Specialist. Building dashboards, M&E systems, and data pipelines for impact programs in Africa." />
-    <meta name="author" content="Mugume Martin" />
-    <meta property="og:title" content="Mugume Martin — Data Analyst" />
-    <meta property="og:description" content="Turning messy program data into decisions that matter." />
-    <meta property="og:type" content="website" />
-    <title>Mugume Martin — Data Analyst & Intelligence Specialist</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Martin Mugume — AI • Data • Automation Engineer</title>
+<meta name="description" content="AI • Data • Automation Engineer & Analytics Engineer. Building intelligent data platforms, AI workflows, and automation systems that transform fragmented data into business advantage." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-page: #FAFAFC;
+    --bg-surface: #FFFFFF;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-card-hover: #FFFFFF;
+    --bg-alt: #F1F5F9;
+
+    --border-subtle: #E2E8F0;
+    --border-hover: rgba(99, 102, 241, 0.4);
+    --border-glow: rgba(168, 85, 247, 0.25);
+
+    --accent-indigo: #4F46E5;
+    --accent-purple: #9333EA;
+    --accent-cyan: #0284C7;
+    --accent-emerald: #059669;
+    --accent-amber: #D97706;
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+
+    --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --maxw: 1240px;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light; }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Dynamic Light Grid Background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.05) 0%, transparent 50%),
+      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .mono { font-family: var(--font-mono); }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+  /* Gradient Text Utility */
+  .text-gradient {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #4338CA 0%, #7E22CE 50%, #0369A1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Badge / Pill */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    color: #4338CA;
+    backdrop-filter: blur(8px);
+  }
+  .badge-emerald {
+    background: rgba(5, 150, 105, 0.08);
+    border-color: rgba(5, 150, 105, 0.25);
+    color: #047857;
+  }
+  .badge-amber {
+    background: rgba(217, 119, 6, 0.08);
+    border-color: rgba(217, 119, 6, 0.25);
+    color: #B45309;
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+  .badge-dot.pulse {
+    animation: pulseGlow 2s infinite ease-in-out;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #4F46E5 0%, #3730A3 100%);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(79, 70, 229, 0.4);
+    background: linear-gradient(135deg, #4338CA 0%, #312E81 100%);
+  }
+  .btn-secondary {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  /* ---------- HEADER / NAV ---------- */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250, 250, 252, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  nav.wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px;
+  }
+  .brand {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-primary);
+  }
+  .brand-logo {
+    width: 32px; height: 32px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, #4F46E5, #9333EA);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 800; color: #FFF;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+  }
+  .navlinks {
+    display: flex; gap: 28px; list-style: none;
+  }
+  .navlinks a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+  }
+  .navlinks a:hover { color: var(--text-primary); }
+  
+  @media (max-width: 960px) {
+    .navlinks { display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 90px 0 70px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    line-height: 1.1;
+    margin: 20px 0;
+  }
+  .hero-content p.lede {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 58ch;
+    margin-bottom: 32px;
+  }
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .stat-card .num {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+  .stat-card .lbl {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-top: 2px;
+  }
+  @media (max-width: 640px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+
+  /* Visual Terminal / Code Preview Card */
+  .hero-visual {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  .visual-header {
+    background: #F8FAFC;
+    padding: 12px 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .window-dots {
+    display: flex; gap: 6px;
+  }
+  .window-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #CBD5E1;
+  }
+  .visual-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .visual-body {
+    padding: 24px;
+  }
+
+  /* Node Pipeline Flow Visual */
+  .pipeline-visual {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .pipeline-step {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #F8FAFC;
+    border: 1px solid var(--border-subtle);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s;
+  }
+  .pipeline-step:hover {
+    border-color: var(--border-hover);
+  }
+  .step-info {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .step-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--accent-indigo);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .step-name {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .step-desc {
+    font-size: 0.75rem; color: var(--text-muted);
+  }
+  .step-status {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #047857;
+    background: rgba(5, 150, 105, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* Connector Animated Arrow */
+  .connector {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1;
+    margin: -8px 0;
+  }
+
+  /* ---------- TRUST SECTION ---------- */
+  .trust-section {
+    padding: 48px 0;
+    border-y: 1px solid var(--border-subtle);
+    background: #F1F5F9;
+  }
+  .trust-title {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+  .trust-grid {
+    display: flex; flex-wrap: wrap; items-center; justify-content: center; gap: 16px 28px;
+  }
+  .trust-logo {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .trust-logo:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ---------- SECTIONS SCALABILITY ---------- */
+  section {
+    padding: 90px 0;
+    position: relative;
+  }
+  .section-header {
+    margin-bottom: 52px;
+  }
+  .section-header h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    margin-top: 12px;
+  }
+  .section-header p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 62ch;
+    margin-top: 12px;
+  }
+
+  /* ---------- AI SOLUTIONS SECTION ---------- */
+  .solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+  }
+  @media (max-width: 480px) {
+    .solutions-grid { grid-template-columns: 1fr; }
+  }
+
+  .solution-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .solution-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .solution-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  }
+  .solution-card:hover::before { opacity: 1; }
+
+  .solution-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .solution-icon {
+    width: 42px; height: 42px; border-radius: var(--radius-md);
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: var(--accent-indigo);
+  }
+  .solution-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+  
+  .solution-meta-item {
+    margin-top: 14px;
+    font-size: 0.88rem;
+  }
+  .solution-meta-item strong {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .solution-meta-item p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .solution-impact-badge {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #047857;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ---------- AUTOMATION & INTEGRATION SECTION ---------- */
+  .automation-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .flow-track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px;
+    background: #F8FAFC;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .flow-node {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all 0.25s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+  .flow-node:hover {
+    border-color: var(--accent-indigo);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    transform: translateY(-2px);
+  }
+  .flow-arrow {
+    color: var(--accent-indigo);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  @media (max-width: 768px) {
+    .flow-track { justify-content: center; }
+  }
+
+  /* ---------- PRODUCTS (BUILDING NOW) ---------- */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+  }
+  .product-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  }
+  .product-card h3 {
+    font-size: 1.15rem;
+    margin: 12px 0 8px;
+  }
+  .product-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  /* ---------- WORK / FEATURED PROJECTS ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 28px;
+  }
+  @media (max-width: 480px) { .work-grid { grid-template-columns: 1fr; } }
+
+  .project-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+  }
+  .project-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  }
+  .project-tags {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    background: #F1F5F9;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .project-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .project-detail {
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+  }
+  .project-detail strong {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block; margin-bottom: 2px;
+  }
+  .project-detail p { color: var(--text-secondary); }
+
+  .project-impact {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-amber);
+    font-weight: 600;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .service-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s;
+  }
+  .service-item:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
+  .service-number {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-indigo);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .service-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  .service-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  /* ---------- TECH STACK ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+  }
+  .stack-category {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .stack-category h3 {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-indigo);
+    margin-bottom: 18px;
+  }
+  .chip-group {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    background: #F8FAFC;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .chip:hover {
+    border-color: var(--border-hover);
+    background: rgba(79, 70, 229, 0.08);
+    color: var(--accent-indigo);
+  }
+
+  /* ---------- FOUNDER / MEET MARTIN ---------- */
+  .founder-card {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .founder-pills {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .founder-body p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* ---------- BLOG SECTION ---------- */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .blog-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    display: flex; flex-direction: column;
+    transition: all 0.3s;
+  }
+  .blog-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  }
+  .blog-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .blog-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .blog-card p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .blog-read {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-indigo);
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ---------- CONTACT & FOOTER ---------- */
+  .contact-box {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(147, 51, 234, 0.03));
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  }
+  @media (max-width: 840px) {
+    .contact-box { grid-template-columns: 1fr; padding: 36px; }
+  }
+  .contact-links {
+    display: flex; flex-direction: column; gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--text-primary); }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  footer .wrap {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+
+  /* Scroll Reveal Animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <div class="brand-logo">M</div>
+      <span>Martin Mugume</span>
+    </a>
+    <ul class="navlinks">
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#automation">Automation</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#founder">Meet Martin</a></li>
+      <li><a href="#blog">Blog</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary">Book Consultation</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <div class="badge badge-emerald">
+          <span class="badge-dot pulse"></span>
+          AI • Data • Automation Engineer
+        </div>
+        <h1>
+          I design <span class="text-gradient-accent">intelligent data platforms</span>, AI workflows &amp; automation systems.
+        </h1>
+        <p class="lede">
+          Transforming fragmented enterprise data into business advantage. 4+ years architecting automated pipelines, custom LLM agents, and real-time decision platforms across finance, tech, and international development.
+        </p>
+        <div class="hero-actions">
+          <a href="#solutions" class="btn btn-primary">
+            Explore Solutions
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="num">4+</div>
+            <div class="lbl">Years Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">500+</div>
+            <div class="lbl">Businesses Tracked</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">99%</div>
+            <div class="lbl">Faster Data Prep</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">100%</div>
+            <div class="lbl">Automated BI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL TERMINAL CARD -->
+      <div class="hero-visual reveal">
+        <div class="visual-header">
+          <div class="window-dots">
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <span class="visual-title">system_pipeline.active</span>
+          <span class="badge badge-emerald" style="padding: 2px 8px; font-size: 0.68rem;">LIVE</span>
+        </div>
+        <div class="visual-body">
+          <div class="pipeline-visual">
+            <div class="pipeline-step">
+              <div class="step-info">
+                <div class="step-icon">⚡</div>
+                <div>
+                  <div class="step-name">ingest_raw_data()</div>
+                  <div class="step-desc">Airtable, PostgreSQL, Webhooks</div>
+                </div>
+              </div>
+              <span class="step-status">COMPLETED</span>
+            </div>
+
+            <div class="connector">↓</div>
+
+            <div class="pipeline-step">
+              <div class="step-info">
+                <div class="step-icon">🤖</div>
+                <div>
+                  <div class="step-name">ai_validation_engine()</div>
+                  <div class="step-desc">OpenAI API &amp; Regex Heuristics</div>
+                </div>
+              </div>
+              <span class="step-status">RUNNING</span>
+            </div>
+
+            <div class="connector">↓</div>
+
+            <div class="pipeline-step">
+              <div class="step-info">
+                <div class="step-icon">📊</div>
+                <div>
+                  <div class="step-name">sync_executive_bi()</div>
+                  <div class="step-desc">Power BI &amp; Databricks Lakehouse</div>
+                </div>
+              </div>
+              <span class="step-status">READY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+  <section class="trust-section">
+    <div class="wrap">
+      <div class="trust-title">Recognized &amp; Trusted Across Global Impact &amp; Enterprise Programs</div>
+      <div class="trust-grid">
+        <div class="trust-logo">Mastercard Foundation</div>
+        <div class="trust-logo">NSSF Hi-Innovator</div>
+        <div class="trust-logo">Outbox Uganda</div>
+        <div class="trust-logo">World Bank Supported Programme</div>
+        <div class="trust-logo">Mcash Uganda</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SOLUTIONS SECTION -->
+  <section id="solutions">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">SOLUTIONS ARCHITECTURE</div>
+        <h2>Enterprise AI &amp; Intelligent Data Solutions</h2>
+        <p>Instead of isolated dashboards, I engineer interconnected solutions that solve core business bottlenecks.</p>
+      </div>
+
+      <div class="solutions-grid">
+        <!-- Solution 1 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">🤖</div>
+            <span class="badge">AI Automation</span>
+          </div>
+          <h3>AI Reporting Assistant</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>Manual executive reporting cycles consumed 4+ days across fragmented spreadsheets.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Python, OpenAI API, Azure Data Factory, Power BI, LangChain</p>
+          </div>
+          <div class="solution-impact-badge">
+            ⚡ Reduced reporting turnaround from 4 days to 30 mins
+          </div>
+        </div>
+
+        <!-- Solution 2 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">🛡️</div>
+            <span class="badge">Data Quality</span>
+          </div>
+          <h3>Intelligent Registration Validator</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>High volume of fraudulent signups and typo-ridden applications polluting production databases.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Python, scikit-learn, Regex Pattern Matching, PostgreSQL Webhooks</p>
+          </div>
+          <div class="solution-impact-badge">
+            🛡️ Filtered 94% of fake signups prior to DB entry
+          </div>
+        </div>
+
+        <!-- Solution 3 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">🎓</div>
+            <span class="badge">Analytics Platform</span>
+          </div>
+          <h3>Learning Analytics Platform</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>Lack of real-time visibility into multi-cohort entrepreneur training and completion rates.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Power BI, Metabase, dbt, PostgreSQL, Automated Pipeline</p>
+          </div>
+          <div class="solution-impact-badge">
+            📈 Increased program completion rates by +38%
+          </div>
+        </div>
+
+        <!-- Solution 4 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">💼</div>
+            <span class="badge">Executive BI</span>
+          </div>
+          <h3>Executive Portfolio Intelligence</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>Disparate metrics across 500+ portfolio companies creating executive blind spots.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Power BI, Databricks, Azure Data Factory, Python</p>
+          </div>
+          <div class="solution-impact-badge">
+            🎯 Single source of truth for Mastercard &amp; NSSF leadership
+          </div>
+        </div>
+
+        <!-- Solution 5 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">💰</div>
+            <span class="badge">FinTech &amp; Grants</span>
+          </div>
+          <h3>Funding Analytics Platform</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>Opaque grant/seed funding disbursements making donor compliance reporting delayed.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Power BI, SQL Server, dbt, Airbyte, Azure</p>
+          </div>
+          <div class="solution-impact-badge">
+            📊 100% audit-ready capital tracking across cohort cycles
+          </div>
+        </div>
+
+        <!-- Solution 6 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">🌾</div>
+            <span class="badge">AgriTech Analytics</span>
+          </div>
+          <h3>Business Performance Dashboard</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>World Bank-supported agricultural development data trapped in offline field logs.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Metabase, Power BI, Python ETL, PostgreSQL</p>
+          </div>
+          <div class="solution-impact-badge">
+            🚀 Real-time supply-chain &amp; farmer financial monitoring
+          </div>
+        </div>
+
+        <!-- Solution 7 -->
+        <div class="solution-card reveal">
+          <div class="solution-header">
+            <div class="solution-icon">💬</div>
+            <span class="badge">Conversational AI</span>
+          </div>
+          <h3>WhatsApp Learning Platform</h3>
+          <div class="solution-meta-item">
+            <strong>Problem</strong>
+            <p>High drop-off on web LMS platforms among field entrepreneurs with limited bandwidth.</p>
+          </div>
+          <div class="solution-meta-item">
+            <strong>Technology</strong>
+            <p>Twilio, Text.it, WhatsApp API, Python, Power BI</p>
+          </div>
+          <div class="solution-impact-badge">
+            💬 4.2x higher course engagement via instant messaging
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION SECTION -->
+  <section id="automation" style="background: #F1F5F9;">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">INTEGRATION &amp; WORKFLOWS</div>
+        <h2>Connected Ecosystems &amp; Automation Architecture</h2>
+        <p>I design self-healing integrations that bridge business tools, AI APIs, and enterprise data warehouses seamlessly.</p>
+      </div>
+
+      <div class="automation-container reveal">
+        <div class="flow-track">
+          <div class="flow-node">Google Workspace</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Airtable</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">PostgreSQL</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Power BI</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">OpenAI</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Slack</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Teams</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">WhatsApp</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Email</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">n8n</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Make.com</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Custom APIs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION (BUILDING NOW) -->
+  <section id="products">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge badge-amber">BUILDING NOW</div>
+        <h2>Incubation &amp; Modern AI Tools</h2>
+        <p>Next-generation data infrastructure and automation tools currently in development.</p>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <span class="badge badge-amber">Coming Soon</span>
+          <h3>AI Reporting Assistant</h3>
+          <p>Autonomous LLM agent allowing executives to query data warehouses in natural language and receive formatted PDF briefs.</p>
+        </div>
+
+        <div class="product-card reveal">
+          <span class="badge badge-amber">Coming Soon</span>
+          <h3>Automation Templates</h3>
+          <p>Production-ready n8n and Make.com workflows built for seamless sync between CRMs, databases, and LLM APIs.</p>
+        </div>
+
+        <div class="product-card reveal">
+          <span class="badge badge-amber">Coming Soon</span>
+          <h3>Data Quality Engine</h3>
+          <p>Automated Python engine that checks incoming transactional records for anomaly patterns, typos, and missing fields.</p>
+        </div>
+
+        <div class="product-card reveal">
+          <span class="badge badge-amber">Coming Soon</span>
+          <h3>Business Intelligence Toolkit</h3>
+          <p>Standardized DAX, SQL, and data modeling blueprints designed for rapid Power BI enterprise deployment.</p>
+        </div>
+
+        <div class="product-card reveal">
+          <span class="badge badge-amber">Coming Soon</span>
+          <h3>AI Document Processor</h3>
+          <p>OCR + Claude/OpenAI extraction engine converting unstructured invoices, receipts, and PDFs into clean tabular database records.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK / PROJECTS -->
+  <section id="work" style="background: #F1F5F9;">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">PROVEN SYSTEMS</div>
+        <h2>Featured Engineering Projects</h2>
+        <p>Production systems shipped to active enterprise and impact organizations.</p>
+      </div>
+
+      <div class="work-grid">
+        <!-- Project 1 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">M&amp;E Frameworks</span>
+          </div>
+          <h3>Organizational Capacity Intelligence Platform</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>Manual evaluation of ESOs across multiple capacity areas created delayed intervention cycles.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Built an automated maturity grading system to categorize organizations and flag capacity gaps.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Power BI, Python, Excel, Azure</p>
+          </div>
+          <div class="project-impact">
+            → Accelerated capacity support allocation by 60%
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">Databricks</span>
+          </div>
+          <h3>Investment Portfolio Analytics Platform</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>Complex capital disbursements across hundreds of startups made donor reporting fragmented.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Designed a unified seed funding analytics engine tracking post-funding revenue and growth metrics.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Power BI, Databricks, Azure Data Factory, SQL</p>
+          </div>
+          <div class="project-impact">
+            → Enabled audit-ready quarterly donor reporting
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">Azure</span>
+          </div>
+          <h3>Executive Portfolio Intelligence Dashboard</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>Executive leadership lacked consolidated visibility into top-level KPIs across cohorts.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Engineered a multi-tier dashboard combining financial health, operational milestones, and risk scores.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Power BI, Azure, Python, PostgreSQL</p>
+          </div>
+          <div class="project-impact">
+            → Single source of truth for 500+ businesses
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">dbt</span>
+          </div>
+          <h3>Learning Analytics Platform</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>Tracking thousands of entrepreneurs across online course modules required manual logs.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Created real-time engagement analytics with automated drop-off alerts for program managers.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Power BI, dbt, Airbyte, PostgreSQL</p>
+          </div>
+          <div class="project-impact">
+            → Live cohort visibility across all training tracks
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Machine Learning</span>
+          </div>
+          <h3>Intelligent Registration Validation Engine</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>High rates of invalid domain signups and bot applications skewed analytics data.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Engineered an automated validation pipeline with typo corrections, email verification, and name matching.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Python, scikit-learn, Regex, FastAPI</p>
+          </div>
+          <div class="project-impact">
+            → Cleaned data upstream before database ingestion
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Metabase</span>
+            <span class="project-tag">Power BI</span>
+          </div>
+          <h3>Automated Financial &amp; Operational Intelligence Platform</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>World Bank ACDP programme required multi-stakeholder operational and grant visibility.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Built automated ETL pipelines feeding dual Metabase/Power BI executive reporting layers.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Metabase, Power BI, SQL Server, Azure</p>
+          </div>
+          <div class="project-impact">
+            → Drastically reduced reporting turnaround time
+          </div>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card reveal">
+          <div class="project-tags">
+            <span class="project-tag">Twilio</span>
+            <span class="project-tag">WhatsApp API</span>
+          </div>
+          <h3>AI-Powered WhatsApp Learning &amp; Certification Platform</h3>
+          <div class="project-detail">
+            <strong>Challenge</strong>
+            <p>Low LMS login rates in remote regions with high data access costs.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Solution</strong>
+            <p>Designed an automated conversational learning bot on WhatsApp with instant digital certificates.</p>
+          </div>
+          <div class="project-detail">
+            <strong>Tech Stack</strong>
+            <p>Twilio, Text.it, Python, Power BI</p>
+          </div>
+          <div class="project-impact">
+            → Scaled course delivery with zero app downloads
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">SERVICES &amp; EXPERTISE</div>
+        <h2>Capabilities &amp; Advisory Services</h2>
+        <p>Available for high-impact technical consulting, system architecture, and hands-on engineering.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-item reveal">
+          <div class="service-number">01</div>
+          <h3>AI Workflow Automation</h3>
+          <p>Building resilient, multi-step LLM workflows and autonomous agents using OpenAI, Claude, and n8n.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">02</div>
+          <h3>Business Process Automation</h3>
+          <p>Eliminating repetitive manual data tasks with custom Python scripts, Make.com, and API webhooks.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">03</div>
+          <h3>Data Engineering</h3>
+          <p>Designing robust ETL/ELT pipelines with Azure Data Factory, Databricks, Airbyte, and dbt.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">04</div>
+          <h3>Analytics Engineering</h3>
+          <p>Transforming raw database tables into clean, tested, documented data models ready for BI tools.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">05</div>
+          <h3>Executive Dashboards</h3>
+          <p>Crafting high-impact, real-time Power BI, Metabase, and Looker Studio reporting dashboards.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">06</div>
+          <h3>Cloud Data Platforms</h3>
+          <p>Architecting scalable data warehouses and lakehouses on Microsoft Azure, BigQuery, and GCP.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">07</div>
+          <h3>API Integrations</h3>
+          <p>Connecting disparate SaaS platforms, ERPs, CRMs, and custom databases via RESTful APIs.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">08</div>
+          <h3>AI Assistants</h3>
+          <p>Building customized, data-aware chatbots and conversational assistants for enterprise teams.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">09</div>
+          <h3>Document Intelligence</h3>
+          <p>Automating data extraction from PDFs, receipts, and unstructured documents with OCR &amp; LLMs.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">10</div>
+          <h3>Data Quality Systems</h3>
+          <p>Implementing continuous data validation, fraud detection, and anomaly screening frameworks.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-number">11</div>
+          <h3>Training &amp; Advisory</h3>
+          <p>Upskilling teams in modern data stack implementation, BI best practices, and AI tool adoption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="stack" style="background: #F1F5F9;">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">TECHNOLOGY ARCHITECTURE</div>
+        <h2>Technical Stack &amp; Tools</h2>
+        <p>A comprehensive inventory of modern languages, platforms, and AI frameworks I build with.</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-category reveal">
+          <h3>Languages</h3>
+          <div class="chip-group">
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>BI &amp; Visualization</h3>
+          <div class="chip-group">
+            <span class="chip">Power BI</span>
+            <span class="chip">Metabase</span>
+            <span class="chip">Looker Studio</span>
+            <span class="chip">Excel / Sheets</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>Analytics Engineering</h3>
+          <div class="chip-group">
+            <span class="chip">dbt</span>
+            <span class="chip">Airbyte</span>
+            <span class="chip">Azure Data Factory</span>
+            <span class="chip">Databricks</span>
+            <span class="chip">Mage</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>Databases</h3>
+          <div class="chip-group">
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">SQL Server</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">BigQuery</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>Cloud Platforms</h3>
+          <div class="chip-group">
+            <span class="chip">Microsoft Azure</span>
+            <span class="chip">Google Cloud (GCP)</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>Automation &amp; DevOps</h3>
+          <div class="chip-group">
+            <span class="chip">n8n</span>
+            <span class="chip">Make.com</span>
+            <span class="chip">Docker</span>
+            <span class="chip">GitHub Actions</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>AI &amp; Machine Learning</h3>
+          <div class="chip-group">
+            <span class="chip">OpenAI API</span>
+            <span class="chip">Claude API</span>
+            <span class="chip">LangChain</span>
+            <span class="chip">RAG</span>
+            <span class="chip">Embeddings</span>
+            <span class="chip">Vector Databases</span>
+            <span class="chip">LLMs</span>
+            <span class="chip">pandas</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">TensorFlow</span>
+          </div>
+        </div>
+
+        <div class="stack-category reveal">
+          <h3>Field &amp; M&amp;E Systems</h3>
+          <div class="chip-group">
+            <span class="chip">KoboToolbox</span>
+            <span class="chip">M&amp;E Frameworks</span>
+            <span class="chip">Data Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER / MEET MARTIN -->
+  <section id="founder">
+    <div class="wrap">
+      <div class="founder-card reveal">
+        <div class="founder-pills">
+          <span class="badge">Engineer</span>
+          <span class="badge">Builder</span>
+          <span class="badge">Researcher</span>
+          <span class="badge badge-amber">Founder</span>
+        </div>
+        <h2>Meet Martin</h2>
+        <div class="founder-body" style="margin-top: 20px;">
+          <p>
+            I am an AI, Data, and Automation Engineer driven by a clear mission: helping organizations adopt modern AI workflows, resilient data platforms, and intelligent automation systems.
+          </p>
+          <p>
+            Having architected systems for World Bank-supported programs, the Mastercard Foundation, and financial technology platforms, I recognize that true business transformation happens when data moves seamlessly from raw chaos to automated insight.
+          </p>
+          <p>
+            My vision is to partner with forward-thinking African enterprises, startups, and global organizations to build the next generation of intelligent business infrastructure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG / ARTICLES -->
+  <section id="blog" style="background: #F1F5F9;">
+    <div class="wrap">
+      <div class="section-header">
+        <div class="badge">ARTICLES &amp; THOUGHTS</div>
+        <h2>Engineering Insights</h2>
+        <p>Perspectives on building modern data architectures, AI agents, and production automation.</p>
+      </div>
+
+      <div class="blog-grid">
+        <div class="blog-card reveal">
+          <div class="blog-tag">AI ENGINEERING</div>
+          <h3>Building AI Agents with n8n</h3>
+          <p>How to design autonomous multi-step agents that connect LLMs to production SQL databases securely.</p>
+          <div class="blog-read">Read Article →</div>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-tag">DATA PIPELINES</div>
+          <h3>Reducing Reporting from 4 Days to 30 Minutes</h3>
+          <p>A breakdown of the Python &amp; Azure pipeline architecture that eliminated manual spreadsheet bottlenecks.</p>
+          <div class="blog-read">Read Article →</div>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-tag">ARCHITECTURE</div>
+          <h3>Modern Data Engineering for SMEs</h3>
+          <p>Selecting a cost-effective, scalable data stack for growing enterprises without over-engineering.</p>
+          <div class="blog-read">Read Article →</div>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-tag">BI OPTIMIZATION</div>
+          <h3>Power BI Performance Optimization</h3>
+          <p>Advanced DAX patterns and Star Schema modeling techniques for lightning-fast executive dashboards.</p>
+          <div class="blog-read">Read Article →</div>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-tag">FUTURE OF DATA</div>
+          <h3>How AI Changes Business Intelligence</h3>
+          <p>Moving from static, reactive dashboards to proactive, conversational AI decision support systems.</p>
+          <div class="blog-read">Read Article →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box reveal">
+        <div>
+          <div class="badge badge-emerald" style="margin-bottom: 16px;">AVAILABLE FOR CONSULTING &amp; FREELANCE</div>
+          <h2>Ready to build intelligent data &amp; AI systems?</h2>
+          <p style="color: var(--text-secondary); margin-top: 14px; line-height: 1.7;">
+            Whether you need a modern data pipeline, an automated AI workflow, or an executive BI platform — let's build something world-class together.
+          </p>
+          <div class="hero-actions" style="margin-top: 28px;">
+            <a href="mailto:mugumemalte@gmail.com" class="btn btn-primary">Send an Email</a>
+            <a href="https://www.linkedin.com/in/martin-mugume-57647775" target="_blank" rel="noopener" class="btn btn-secondary">Connect on LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="contact-links">
+          <div class="contact-link">
+            <span>📍 Location:</span>
+            <strong style="color: var(--text-primary);">Kampala, Uganda (Available Remote)</strong>
+          </div>
+          <div class="contact-link">
+            <span>📞 Phone:</span>
+            <strong style="color: var(--text-primary);">+256 704 945 815</strong>
+          </div>
+          <div class="contact-link">
+            <span>✉️ Email:</span>
+            <a href="mailto:mugumemalte@gmail.com" style="color: var(--accent-indigo);">mugumemalte@gmail.com</a>
+          </div>
+          <div class="contact-link">
+            <span>🔗 GitHub:</span>
+            <a href="https://github.com/cishamalty" target="_blank" rel="noopener" style="color: var(--accent-indigo);">github.com/cishamalty</a>
+          </div>
+          <div class="contact-link">
+            <span>🌐 Portfolio:</span>
+            <a href="https://mugume-portfolio-two.vercel.app/" target="_blank" rel="noopener" style="color: var(--accent-indigo);">mugume-portfolio-two.vercel.app</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Martin Mugume. All rights reserved.</span>
+    <span>Designed &amp; Engineered like a Modern AI Company.</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal animation using IntersectionObserver
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
+  });
+</script>
+
+</body>
 </html>
